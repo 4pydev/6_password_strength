@@ -1,4 +1,4 @@
-PASS_TYPES_WEIGHTS = {
+PASS_FEATURES_WEIGHTS = {
     'has_case_sensitivity': 1,
     'has_digits': 2,
     'has_special_chars': 2,
@@ -6,20 +6,28 @@ PASS_TYPES_WEIGHTS = {
 }
 BLACKLIST = './blacklist.txt'
 
+
+def load_blacklist(blacklist_file=BLACKLIST):
+    with open(blacklist_file, 'r') as file:
+        black_list = file.read().split()
+    return black_list
+
+
 def get_password_strength(password):
+    # initial password strength
     password_strength = 1
     # case sensitivity
     if has_case_sensitivity(password):
-        password_strength += PASS_TYPES_WEIGHTS['has_case_sensitivity']
+        password_strength += PASS_FEATURES_WEIGHTS['has_case_sensitivity']
     # one or more numerical digit
     if has_digits(password):
-        password_strength += PASS_TYPES_WEIGHTS['has_digits']
+        password_strength += PASS_FEATURES_WEIGHTS['has_digits']
     # special character @, #, ...
     if has_special_chars(password):
-        password_strength += PASS_TYPES_WEIGHTS['has_special_chars']
+        password_strength += PASS_FEATURES_WEIGHTS['has_special_chars']
     # blacklist
-    if not_in_blacklist(password):
-        password_strength += PASS_TYPES_WEIGHTS['not_in_blacklist']
+    if not is_in_blacklist(password):
+        password_strength += PASS_FEATURES_WEIGHTS['not_in_blacklist']
     return password_strength
 
 
@@ -44,8 +52,10 @@ def has_special_chars(password):
     return False
 
 
-def not_in_blacklist(password, black_list=BLACKLIST):
-    pass
+def is_in_blacklist(password, black_list=load_blacklist(BLACKLIST)):
+    for word in black_list:
+        if word.lower() == password.lower(): return True
+    return False
 
 
 if __name__ == '__main__':
