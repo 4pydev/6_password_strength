@@ -45,13 +45,15 @@ def has_case_sensitivity(password):
 
 def has_digits(password):
     for char in password:
-        if char.isdigit(): return True
+        if char.isdigit():
+            return True
     return False
 
 
 def has_special_chars(password):
     for char in password:
-        if not char.isalpha() and not char.isdigit(): return True
+        if not char.isalpha() and not char.isdigit():
+            return True
     return False
 
 
@@ -60,7 +62,8 @@ def is_in_blacklist(password, black_list=load_blacklist(BLACKLIST)):
         return True
     else:
         for word in black_list:
-            if word.lower() == password.lower(): return True
+            if word.lower() == password.lower():
+                return True
         return False
 
 
