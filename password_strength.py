@@ -8,9 +8,12 @@ BLACKLIST = './blacklist.txt'
 
 
 def load_blacklist(blacklist_file=BLACKLIST):
-    with open(blacklist_file, 'r') as file:
-        black_list = file.read().split()
-    return black_list
+    try:
+        with open(blacklist_file, 'r') as file:
+            black_list = file.read().split()
+        return black_list
+    except FileNotFoundError:
+        return []
 
 
 def get_password_strength(password):
@@ -53,9 +56,12 @@ def has_special_chars(password):
 
 
 def is_in_blacklist(password, black_list=load_blacklist(BLACKLIST)):
-    for word in black_list:
-        if word.lower() == password.lower(): return True
-    return False
+    if black_list == []:
+        return True
+    else:
+        for word in black_list:
+            if word.lower() == password.lower(): return True
+        return False
 
 
 if __name__ == '__main__':
