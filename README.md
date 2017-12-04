@@ -1,7 +1,18 @@
-# Password Strength Calculator
+# Калькулятор "силы" пароля
 
-[TODO. There will be project description]
+Скрипт запрашивает у пользователя пароль и выдаёт ему оценку от 1 до 10. 1 – очень слабый пароль, 10 – очень крутой.
 
-# Project Goals
+# Исползование и пример вывода.
 
-The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
+Для использования необходим установленный Python 3.5.
+```bush
+$ python3 password_strength.py
+
+Enter a password: jkUY12@
+Your password strength: 10
+
+```
+
+# Цели проекта
+
+Данный код написан в образовательных целях. Обучающий курс для веб-разработчиков - [DEVMAN.org](https://devman.org)
