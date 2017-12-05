@@ -22,7 +22,6 @@ def get_password_strength(password, black_list):
         'not_in_blacklist': 4
     }
 
-    # initial password strength
     password_strength = 1
 
     if has_case_sensitivity(password):
@@ -41,16 +40,16 @@ def get_password_strength(password, black_list):
 
 
 def has_case_sensitivity(password):
-    return True if any(char.islower() for char in password) and \
-                   any(char.isupper() for char in password) else False
+    return bool(any(char.islower() for char in password) and any(
+                    char.isupper() for char in password))
 
 
 def has_digits(password):
-    return True if any(char.isdigit() for char in password) else False
+    return any(char.isdigit() for char in password)
 
 
 def has_special_chars(password):
-    return True if not password.isalnum() else False
+    return not password.isalnum()
 
 
 def is_in_blacklist(password, black_list):
