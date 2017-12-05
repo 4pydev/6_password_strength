@@ -15,7 +15,7 @@ def load_blacklist(blacklist_file):
 
 def get_password_strength(password, black_list):
 
-    PASS_FEATURES_WEIGHTS = {
+    pass_features_weight = {
         'has_case_sensitivity': 1,
         'has_digits': 2,
         'has_special_chars': 2,
@@ -26,16 +26,16 @@ def get_password_strength(password, black_list):
     password_strength = 1
 
     if has_case_sensitivity(password):
-        password_strength += PASS_FEATURES_WEIGHTS['has_case_sensitivity']
+        password_strength += pass_features_weight['has_case_sensitivity']
 
     if has_digits(password):
-        password_strength += PASS_FEATURES_WEIGHTS['has_digits']
+        password_strength += pass_features_weight['has_digits']
 
     if has_special_chars(password):
-        password_strength += PASS_FEATURES_WEIGHTS['has_special_chars']
+        password_strength += pass_features_weight['has_special_chars']
 
     if not is_in_blacklist(password, black_list):
-        password_strength += PASS_FEATURES_WEIGHTS['not_in_blacklist']
+        password_strength += pass_features_weight['not_in_blacklist']
 
     return password_strength
 
