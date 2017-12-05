@@ -1,3 +1,6 @@
+from getpass import getpass
+
+
 PASS_FEATURES_WEIGHTS = {
     'has_case_sensitivity': 1,
     'has_digits': 2,
@@ -19,16 +22,16 @@ def load_blacklist(blacklist_file=BLACKLIST):
 def get_password_strength(password):
     # initial password strength
     password_strength = 1
-    # case sensitivity
+
     if has_case_sensitivity(password):
         password_strength += PASS_FEATURES_WEIGHTS['has_case_sensitivity']
-    # one or more numerical digit
+
     if has_digits(password):
         password_strength += PASS_FEATURES_WEIGHTS['has_digits']
-    # special character @, #, ...
+
     if has_special_chars(password):
         password_strength += PASS_FEATURES_WEIGHTS['has_special_chars']
-    # blacklist
+
     if not is_in_blacklist(password):
         password_strength += PASS_FEATURES_WEIGHTS['not_in_blacklist']
     return password_strength
@@ -68,6 +71,6 @@ def is_in_blacklist(password, black_list=load_blacklist(BLACKLIST)):
 
 
 if __name__ == '__main__':
-    usr_password = input("Enter a password: ")
+    usr_password = getpass("Enter a password: ")
     print("Your password strength: {}".format(
                         get_password_strength(usr_password)))
